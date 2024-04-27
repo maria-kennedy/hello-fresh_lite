@@ -1,0 +1,42 @@
+<%= form_with(model: meal) do |form| %>
+  <% if meal.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(meal.errors.count, "error") %> prohibited this meal from being saved:</h2>
+
+      <ul>
+        <% meal.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :title, style: "display: block" %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div>
+    <%= form.label :cooking_time, style: "display: block" %>
+    <%= form.number_field :cooking_time %>
+  </div>
+
+  <div>
+    <%= form.label :category, style: "display: block" %>
+    <%= form.text_field :category %>
+  </div>
+
+  <div>
+    <%= form_for @meal do |f| %>
+    <%= f.label :difficulty_level %>
+    <%= f.select :difficulty_level, Meal.difficulty_levels.keys.map { |w| [w.humanize, w] } %>
+  <% end %>
+    <%# <%= form.label :difficulty_level, style: "display: block" %>
+    <%# <%= form.select :difficulty_level, @meal.difficulty_level.keys.to_a %>
+    <%# <%= form.text_field :difficulty_level %> 
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
