@@ -22,18 +22,17 @@
   </div>
 
   <div>
-    <%= form.label :category, style: "display: block" %>
-    <%= form.text_field :category %>
+    <%= form_for @meal do |f| %>
+      <%= f.label :category %>
+      <%= f.select :category, Meal.categories.keys.map { |w| [w.humanize, w] } %>
+    <% end %>
   </div>
 
   <div>
     <%= form_for @meal do |f| %>
-    <%= f.label :difficulty_level %>
-    <%= f.select :difficulty_level, Meal.difficulty_levels.keys.map { |w| [w.humanize, w] } %>
-  <% end %>
-    <%# <%= form.label :difficulty_level, style: "display: block" %>
-    <%# <%= form.select :difficulty_level, @meal.difficulty_level.keys.to_a %>
-    <%# <%= form.text_field :difficulty_level %> 
+      <%= f.label :difficulty_level %>
+      <%= f.select :difficulty_level, Meal.difficulty_levels.keys.map { |w| [w.humanize, w] } %>
+    <% end %>
   </div>
 
   <div>

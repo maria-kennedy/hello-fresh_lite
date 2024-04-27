@@ -12,12 +12,9 @@ class Meal < ApplicationRecord
         snack: 3, 
         dessert: 4 
     }
-  
 
     validates :title, presence: true, length: { maximum: 255 }
-    validates :description, presence: true
     validates :cooking_time, presence: true, numericality: { only_integer: true, greater_than: 0 }
-    validates :servings, presence: true, numericality: { only_integer: true, greater_than: 0 }
     validates :difficulty_level, presence: true, inclusion: { in: difficulty_levels.keys }
     validates :category, presence: true, inclusion: { in: categories.keys }
 
