@@ -18,4 +18,11 @@ class Meal < ApplicationRecord
     validates :difficulty_level, presence: true, inclusion: { in: difficulty_levels.keys }
     validates :category, presence: true, inclusion: { in: categories.keys }
 
+    # def level_is
+    #     difficulty_level
+    # end
+    # def category_is
+    #     category.to_s.humanize
+    # end
+
 end

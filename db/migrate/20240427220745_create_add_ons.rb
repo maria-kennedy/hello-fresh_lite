@@ -4,7 +4,7 @@ class CreateAddOns < ActiveRecord::Migration[7.0]
       t.string :name, limit: 255
       t.integer :servings
       t.decimal :price
-      t.string :category
+      t.integer :category
 
       t.timestamps
     end

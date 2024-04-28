@@ -18,7 +18,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_27_220745) do
     t.string "name", limit: 255
     t.integer "servings"
     t.decimal "price"
-    t.string "category"
+    t.integer "category"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -26,8 +26,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_27_220745) do
   create_table "meals", force: :cascade do |t|
     t.string "title", limit: 255
     t.integer "cooking_time"
-    t.string "category"
-    t.string "difficulty_level"
+    t.integer "category"
+    t.integer "difficulty_level"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
