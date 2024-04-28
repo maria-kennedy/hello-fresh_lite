@@ -18,11 +18,19 @@ class Meal < ApplicationRecord
     validates :difficulty_level, presence: true, inclusion: { in: difficulty_levels.keys }
     validates :category, presence: true, inclusion: { in: categories.keys }
 
-    # def level_is
-    #     difficulty_level
+    # sort methods
+
+    # def t_sort
+    #     Meal.order(title: :asc)
     # end
-    # def category_is
-    #     category.to_s.humanize
+    # def ct_sort
+    #     Meal.order(cooking_time: :asc)
+    # end
+    # def dl_sort
+    #     Meal.order(difficulty_level: :asc)
+    # end
+    # def c_sort
+    #     Meal.order(category: :asc)
     # end
 
 end

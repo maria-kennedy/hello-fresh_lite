@@ -20,39 +20,41 @@
         <td data-attribute="difficulty-level"><%= meal.difficulty_level.humanize %></td>
       </tr>
     <% end %>
+  </tbody>
 </table>
 
+<button id="sort-button">Toggle Sort Order</button>
+
 <script>
- 
   const headerCells = document.querySelectorAll('.header-cell');
+  let ascendingOrder = true;
 
   headerCells.forEach(cell => {
       cell.addEventListener('click', () => {
           const attribute = cell.dataset.attribute; 
-          const direction = cell.dataset.direction || 'asc'; 
-
-         
-          const newDirection = direction === 'asc' ? 'desc' : 'asc';
-          cell.dataset.direction = newDirection;
-
-          
-          sortTable(attribute, newDirection);
+          sortTable(attribute);
       });
   });
 
+  document.getElementById('sort-button').addEventListener('click', () => {
+    ascendingOrder = !ascendingOrder;
+    const attribute = document.querySelector('.sorted').dataset.attribute;
+    sortTable(attribute);
+  });
 
-  function sortTable(attribute, direction) {
+  function sortTable(attribute) {
     const table = document.querySelector('#meals-table');
     const rows = Array.from(table.rows).slice(1); 
 
     rows.sort((rowA, rowB) => {
       const cellA = rowA.querySelector(`[data-attribute=${attribute}]`).textContent;
       const cellB = rowB.querySelector(`[data-attribute=${attribute}]`).textContent;
-
-      return direction === 'asc' ? cellA.localeCompare(cellB) : cellB.localeCompare(cellA);
+      return ascendingOrder ? cellA.localeCompare(cellB) : cellB.localeCompare(cellA);
     });
 
     rows.forEach(row => table.deleteRow(row.rowIndex));
     rows.forEach(row => table.appendChild(row));
+    document.querySelectorAll('.header-cell').forEach(cell => cell.classList.remove('sorted'));
+    document.querySelector(`[data-attribute=${attribute}]`).classList.add('sorted');
   }
 </script>
