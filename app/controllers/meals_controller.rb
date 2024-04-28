@@ -4,10 +4,12 @@ class MealsController < ApplicationController
   # GET /meals or /meals.json
   def index
     @meals = Meal.all
+    render :index
   end
 
   # GET /meals/1 or /meals/1.json
   def show
+    @meal = Meal.find(params[:id])
   end
 
   # GET /meals/new

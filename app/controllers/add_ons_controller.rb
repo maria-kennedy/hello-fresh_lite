@@ -4,10 +4,12 @@ class AddOnsController < ApplicationController
   # GET /add_ons or /add_ons.json
   def index
     @add_ons = AddOn.all
+    render :index
   end
 
   # GET /add_ons/1 or /add_ons/1.json
   def show
+    @add_on = AddOn.find(params[:id])
   end
 
   # GET /add_ons/new

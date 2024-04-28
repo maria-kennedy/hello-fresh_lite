@@ -1,22 +1,10 @@
-<div id="<%= dom_id meal %>">
-  <p>
-    <strong>Title:</strong>
-    <%= meal.title %>
-  </p>
-
-  <p>
-    <strong>Cooking time:</strong>
-    <%= meal.cooking_time %>
-  </p>
-
-  <p>
-    <strong>Category:</strong>
-    <%= meal.category.humanize %>
-  </p>
-
-  <p>
-    <strong>Difficulty level:</strong>
-    <%= meal.difficulty_level.humanize %>
-  </p>
-
-</div>
+<ul>
+  <% @meals.each do |meal| %>
+    <li>
+      <%= link_to meal.title, meal_path(meal) %>
+      <p></p>
+      <p><strong><%= meal.cooking_time %> minute <%= meal.category.humanize %> 
+      | Difficulty level: <%= meal.difficulty_level.humanize %></strong></p>
+    </li>
+  <% end %>
+</ul>

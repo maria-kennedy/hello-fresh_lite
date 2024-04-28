@@ -2,13 +2,57 @@
 
 <h1>Meals</h1>
 
-<div id="meals">
-  <% @meals.each do |meal| %>
-    <%= render meal %>
-    <p>
-      <%= link_to "Show this meal", meal %>
-    </p>
-  <% end %>
-</div>
+<table id="meals-table">
+  <thead>
+    <tr>
+      <th class="header-cell" data-attribute="title"> <%= link_to "Title" %> </th>
+      <th class="header-cell" data-attribute="cooking-time"><%= link_to "Cooking Time" %></th>
+      <th class="header-cell" data-attribute="category"> <%= link_to "Category" %></th>
+      <th class="header-cell" data-attribute="difficulty-level"> <%= link_to "Difficulty Level" %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @meals.each do |meal| %>
+      <tr>
+        <td data-attribute="title"><%= link_to meal.title, meal_path(meal) %></td>
+        <td data-attribute="cooking-time"><%= meal.cooking_time %> minutes</td>
+        <td data-attribute="category"><%= meal.category.humanize %></td>
+        <td data-attribute="difficulty-level"><%= meal.difficulty_level.humanize %></td>
+      </tr>
+    <% end %>
+</table>
 
-<%= link_to "New meal", new_meal_path %>
+<script>
+ 
+  const headerCells = document.querySelectorAll('.header-cell');
+
+  headerCells.forEach(cell => {
+      cell.addEventListener('click', () => {
+          const attribute = cell.dataset.attribute; 
+          const direction = cell.dataset.direction || 'asc'; 
+
+         
+          const newDirection = direction === 'asc' ? 'desc' : 'asc';
+          cell.dataset.direction = newDirection;
+
+          
+          sortTable(attribute, newDirection);
+      });
+  });
+
+
+  function sortTable(attribute, direction) {
+    const table = document.querySelector('#meals-table');
+    const rows = Array.from(table.rows).slice(1); 
+
+    rows.sort((rowA, rowB) => {
+      const cellA = rowA.querySelector(`[data-attribute=${attribute}]`).textContent;
+      const cellB = rowB.querySelector(`[data-attribute=${attribute}]`).textContent;
+
+      return direction === 'asc' ? cellA.localeCompare(cellB) : cellB.localeCompare(cellA);
+    });
+
+    rows.forEach(row => table.deleteRow(row.rowIndex));
+    rows.forEach(row => table.appendChild(row));
+  }
+</script>
