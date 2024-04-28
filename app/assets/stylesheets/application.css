@@ -13,3 +13,8 @@
  *= require_tree .
  *= require_self
  */
+ /* // Custom Bootstrap variables must be defined before importing Bootstrap */
+ @import "bootstrap/scss/functions";
+ @import "bootstrap/scss/variables";
+ @import "bootstrap";
+ 
